@@ -1,0 +1,129 @@
+Trabajo Práctico Nº 5: Bash scripting
+ PARTE I
+ 1. Adivina el número: 
+ import random
+
+def main():
+    numero_secreto = random.randint(1, 100)
+    intento = 0
+
+    while True:
+        try:
+            adivinanza = int(input("Adivina el número (1-100): "))
+            intento += 1
+
+            if adivinanza == numero_secreto:
+                print(f"¡Correcto! Adivinaste en {intento} intentos.")
+                break
+            elif adivinanza < numero_secreto:
+                print("Demasiado bajo. Intenta nuevamente.")
+            else:
+                print("Demasiado alto. Intenta nuevamente.")
+        except ValueError:
+            print("Ingresa un número válido.")
+
+if __name__ == "__main__":
+    main()
+El código genera un número aleatorio entre 1 y 100 y permite al usuario adivinarlo. Deja pistas si el intento es demasiado alto o bajo. 
+
+2. Piedra, Papel o Tijeras:
+import random
+
+def main():
+    opciones = ["piedra", "papel", "tijeras"]
+    computadora = random.choice(opciones)
+
+    usuario = input("Elige piedra, papel o tijeras: ").lower()
+
+    if usuario in opciones:
+        if usuario == computadora:
+            print(f"Empate. La computadora también eligió {usuario}.")
+        elif (usuario == "piedra" and computadora == "tijeras") or \
+             (usuario == "papel" and computadora == "piedra") or \
+             (usuario == "tijeras" and computadora == "papel"):
+            print(f"¡Ganaste! La computadora eligió {computadora}.")
+        else:
+            print(f"Perdiste. La computadora eligió {computadora}.")
+    else:
+        print("Opción no válida. Elige piedra, papel o tijeras.")
+
+if __name__ == "__main__":
+    main()
+el código permite al usuario elegir entre piedra, papel o tijeras, y luego compara la elección del usuario con la de la computadora para determinar el ganador.
+
+3. Calculadora Simple:
+def main():
+    try:
+        num1 = float(input("Ingresa el primer número: "))
+        num2 = float(input("Ingresa el segundo número: "))
+        operacion = input("Elige la operación (+, -, *, /): ")
+
+        if operacion == "+":
+            resultado = num1 + num2
+        elif operacion == "-":
+            resultado = num1 - num2
+        elif operacion == "*":
+            resultado = num1 * num2
+        elif operacion == "/":
+            resultado = num1 / num2
+        else:
+            print("Operación no válida. Elige +, -, *, o /.")
+            return
+
+        print(f"Resultado: {resultado}")
+    except ValueError:
+        print("Ingresa números válidos.")
+
+if __name__ == "__main__":
+    main()
+    el código solicita al usuario dos números y la operación deseada (suma, resta, multiplicación o división). Luego muestra el resultado.
+
+  4. Contador de Palabras:
+  def contar_palabras_archivo(nombre_archivo):
+    try:
+        with open(nombre_archivo, 'r') as archivo:
+            contenido = archivo.read()
+            palabras = contenido.split()
+            num_palabras = len(palabras)
+            return num_palabras
+    except FileNotFoundError:
+        return "Archivo no encontrado."
+import time
+
+def cronometro():
+    inicio = None
+    tiempo_transcurrido = 0
+
+    while True:
+        accion = input("Presiona 'i' para iniciar, 'd' para detener o 'r' para reiniciar: ")
+
+        if accion == 'i':
+            if inicio is None:
+                inicio = time.time()
+                print("Cronómetro iniciado.")
+            else:
+                print("El cronómetro ya está en marcha.")
+        elif accion == 'd':
+            if inicio is not None:
+                fin = time.time()
+                tiempo_transcurrido += fin - inicio
+                inicio = None
+                print(f"Tiempo transcurrido: {int(tiempo_transcurrido)} segundos.")
+            else:
+                print("El cronómetro no está en marcha.")
+        elif accion == 'r':
+            inicio = None
+            tiempo_transcurrido = 0
+            print("Cronómetro reiniciado.")
+        else:
+            print("Acción no válida. Presiona 'i', 'd' o 'r'.")
+
+if __name__ == "__main__":
+    cronometro()
+el código permite al usuario iniciar, detener y reiniciar el cronómetro, mostrando el tiempo transcurrido en segundos.
+archivo = "mi_archivo.txt"
+resultado = contar_palabras_archivo(archivo)
+print(f"Número de palabras en '{archivo}': {resultado}")
+se reemplaza "mi_archivo.txt" con la ruta de tu archivo de texto.
+
+5. Cronómetro:
