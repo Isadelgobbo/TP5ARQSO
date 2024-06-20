@@ -1,0 +1,93 @@
+parte 2
+
+6. Usar la API de weatherapi.com para obtener el clima actual de una ciudad.
+import requests
+
+# Tu clave de API
+api_key = 'TU_CLAVE_API'
+# La ciudad que deseas consultar
+city = 'Madrid'
+
+# URL de la API
+url = f'http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}'
+
+# Hacer la solicitud
+response = requests.get(url)
+
+# Verificar que la solicitud fue exitosa
+if response.status_code == 200:
+    # Convertir la respuesta a JSON
+    weather_data = response.json()
+    
+    # Extraer y mostrar la información del clima
+    current_weather = weather_data['current']
+    print(f"Ciudad: {city}")
+    print(f"Temperatura: {current_weather['temp_c']}°C")
+    print(f"Condición: {current_weather['condition']['text']}")
+    print(f"Humedad: {current_weather['humidity']}%")
+    print(f"Viento: {current_weather['wind_kph']} km/h")
+else:
+    print("Error en la solicitud:", response.status_code)
+7. Mostrar el género de un nombre ingresado por el usuario, usando la API del sitio
+ https://api.agify.io/?name=nombre.
+import requests
+
+def obtener_genero(nombre):
+    # URL de la API
+    url = f'https://api.genderize.io/?name={nombre}'
+    
+    # Hacer la solicitud
+    response = requests.get(url)
+    
+    # Verificar que la solicitud fue exitosa
+    if response.status_code == 200:
+        # Convertir la respuesta a JSON
+        gender_data = response.json()
+        
+        # Extraer y mostrar la información del género
+        nombre = gender_data['name']
+        genero = gender_data['gender']
+        probabilidad = gender_data['probability']
+        count = gender_data['count']
+        print(f"Nombre: {nombre}")
+        print(f"Género: {genero}")
+        print(f"Probabilidad: {probabilidad}")
+        print(f"Recuento: {count}")
+    else:
+        print("Error en la solicitud:", response.status_code)
+
+# Solicitar al usuario que ingrese un nombre
+nombre_usuario = input("Ingrese un nombre: ")
+obtener_genero(nombre_usuario)
+
+8. Mostrar la edad probable de un nombre ingresado por el usuario, usando la API del
+ sitio https://api.genderize.io/?name=nombre
+
+ import requests
+
+def obtener_edad_probable(nombre):
+    # URL de la API
+    url = f'https://api.agify.io/?name={nombre}'
+    
+    # Hacer la solicitud
+    response = requests.get(url)
+    
+    # Verificar que la solicitud fue exitosa
+    if response.status_code == 200:
+        # Convertir la respuesta a JSON
+        age_data = response.json()
+        
+        # Extraer y mostrar la información de la edad probable
+        nombre = age_data['name']
+        edad = age_data['age']
+        count = age_data['count']
+        print(f"Nombre: {nombre}")
+        print(f"Edad probable: {edad}")
+        print(f"Recuento: {count}")
+    else:
+        print("Error en la solicitud:", response.status_code)
+
+# Solicitar al usuario que ingrese un nombre
+nombre_usuario = input("Ingrese un nombre: ")
+obtener_edad_probable(nombre_usuario)
+
